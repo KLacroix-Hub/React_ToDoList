@@ -1,22 +1,16 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState} from 'react';
 
 function TodoForm(props) {
     const [text, setText] = useState(props.edit ? props.edit.value : '');
-    // const [content, setContent] = useState('');
-
-    const inputRef = useRef(null);
-
-    useEffect(() => {
-        inputRef.current.focus();
-    });
+    const [content, setContent] = useState('');
 
     const handleChangeText = e => {
         setText(e.target.value);
     };
 
-    // const handleChangeContent = e => {
-    //     setContent(e.target.value);
-    // };
+    const handleChangeContent = e => {
+        setContent(e.target.value);
+    };
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -24,15 +18,15 @@ function TodoForm(props) {
         props.onSubmit({
             id: Math.floor(Math.random() * 10000),
             text: text,
-            // content: content,
+            content: content,
         });
 
         setText('');
-        // setContent('');
+        setContent('');
     };
 
     return (
-        <div>
+        <div className='form-container'>
             <form className="todo-form" onSubmit={handleSubmit}>
 
                 {props.edit ? ( <><input
@@ -40,20 +34,18 @@ function TodoForm(props) {
                         placeholder="Modifier la tâche"
                         value={text}
                         name="text"
-                        className="todo-input"
+                        className="todo-input-title"
                         onChange={handleChangeText}
-                        ref={inputRef}
                     />
 
-                    {/*<input*/}
-                    {/*    type="text"*/}
-                    {/*    placeholder="Contenu de la tâche"*/}
-                    {/*    value={content}*/}
-                    {/*    name="content"*/}
-                    {/*    className="todo-input"*/}
-                    {/*    onChange={handleChangeContent}*/}
-                    {/*    ref={inputRef}*/}
-                    {/*/>*/}
+                    <input
+                        type="text"
+                        placeholder="Contenu de la tâche"
+                        value={content}
+                        name="content"
+                        className="todo-input-content"
+                        onChange={handleChangeContent}
+                    />
 
                     <button className="todo-button">Modifier la tâche</button> </>) :
                     (<><input
@@ -61,19 +53,17 @@ function TodoForm(props) {
                     placeholder="Titre de la tâche"
                     value={text}
                     name="text"
-                    className="todo-input"
+                    className="todo-input-title"
                     onChange={handleChangeText}
-                    ref={inputRef}
                     />
-                    {/*<input*/}
-                    {/*type="text"*/}
-                    {/*placeholder="Contenu de la tâche"*/}
-                    {/*value={content}*/}
-                    {/*name="content"*/}
-                    {/*className="todo-input"*/}
-                    {/*onChange={handleChangeContent}*/}
-                    {/*ref={inputRef}*/}
-                    {/*/>*/}
+                    <input
+                    type="text"
+                    placeholder="Contenu de la tâche"
+                    value={content}
+                    name="content"
+                    className="todo-input-content"
+                    onChange={handleChangeContent}
+                    />
 
                     <button className="todo-button">Ajouter une tâche</button> </>)
                 }

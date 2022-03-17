@@ -36,10 +36,12 @@ function TodoList(){
     }
 
     return  (
-        <div>
-            <h1>Les tâches d'aujourdhui:</h1>
+        <div className='todo-form-container'>
+            <h1 className="title-header">Les tâches d'aujourdhui:</h1>
             <TodoForm onSubmit={addToDo} />
+            <div className="grid">
             <Todo todos={todos} completeTodo={completeTodo} removeTodo={removeTodo} updateTodo={updateTodo} />
+            </div>
         </div>
     );
 }
